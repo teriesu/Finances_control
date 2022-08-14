@@ -36,7 +36,7 @@ class FinViz_scraper:
 
                 fundamentals = pd.DataFrame()
                 fundamentals['Attributes'] = attrs
-                fundamentals['Values'] = vals
+                fundamentals['ActValue'] = vals
                 fundamentals = fundamentals.set_index('Attributes')
                 action_value = fundamentals.loc['Price']
                 # print(action_value.head())
