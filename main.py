@@ -5,7 +5,7 @@ if __name__ == '__main__':
     utils = Utils()
     scraper = FinViz_scraper()
 
-    compData = utils.read_companies('Data/companies.csv')
+    compData = utils.read_companies()
     compActData = scraper.get_value()
 
     utils.calcProffit(compData, compActData)

@@ -8,7 +8,7 @@ class FinViz_scraper:
 
     def get_value(self):
         utils = Utils()
-        companie_names = utils.read_companies('Data/companies.csv', columns = 'CompID')
+        companie_names = utils.read_companies(columns = 'CompID')
         prices = pd.DataFrame()
         for add in companie_names:
 

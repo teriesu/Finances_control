@@ -1,6 +1,6 @@
-CompID,StartValue,StartInvest
-TSLA,660.28,20
-MSFT,281.54,25
-AAPL,153.04,24.90
-CF, 100.48,13.36
-HLT, 165.68, 26.03
+CompID,Name,StartValue,StartInvest
+TSLA,Tesla Inc.,660.28,20
+MSFT,Microsoft Corporation,281.54,25
+AAPL,Apple Inc.,153.04,24.90
+CF,CF Industries Holdings Inc.,100.48,13.36
+HLT,Hilton Worldwide Holdings Inc.,165.68, 26.03
