@@ -8,4 +8,4 @@ if __name__ == '__main__':
     compData = utils.read_companies()
     compActData = scraper.get_value()
 
-    utils.calcProffit(compData, compActData)
+    print(utils.calcProffit(compData, compActData))
