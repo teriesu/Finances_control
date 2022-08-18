@@ -6,11 +6,14 @@ from utils import Utils
 
 class FinViz_scraper:
 
+    def __init__(self):
+        self.utils = Utils()
+        self.companie_names = self.utils.read_companies(columns = 'CompID')
+        self.prices = pd.DataFrame()
+
     def get_value(self):
-        utils = Utils()
-        companie_names = utils.read_companies(columns = 'CompID')
-        prices = pd.DataFrame()
-        for add in companie_names:
+
+        for add in self.companie_names:
 
             url = f'https://finviz.com/quote.ashx?t={add}'
             req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -40,10 +43,10 @@ class FinViz_scraper:
                 fundamentals = fundamentals.set_index('Attributes')
                 action_value = fundamentals.loc['Price']
                 # print(action_value.head())
-                prices = prices.append(action_value, ignore_index=True)
+                self.prices = self.prices.append(action_value, ignore_index=True)
                 # return action_value
 
             except Exception as e:
                 return e
-            prices['CompID'] = companie_names
-        return prices
+            self.prices['CompID'] = self.companie_names
+        return self.prices
