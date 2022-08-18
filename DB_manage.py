@@ -1,5 +1,7 @@
 import pymysql
 import json
+from scraping import FinViz_scraper
+from datetime import datetime
 
 class DataBase:
     def __init__(self):
@@ -28,7 +30,7 @@ class DataBase:
             raise
 
     def load_one_company(self, id):
-        sql = f'SELECT * FROM stock WHERE id = {id}'
+        sql = f'SELECT * FROM stock WHERE CompID = {id}'
 
         try:
             self.cursor.execute(sql)
@@ -37,5 +39,30 @@ class DataBase:
         except Exception as e:
             raise
 
+    def del_invest(self, id):
+        sql = f'DELETE FROM stock WHERE (CompID = {id});'
+
+        try:
+            self.cursor.execute(sql)
+            datos = self.cursor.fetchall()
+            print(datos)
+
+        except Exception as e:
+            raise
+
+    def create_invest(self, id, name, StartInvest):
+        scraper = FinViz_scraper()
+
+        sql = f"INSERT INTO stock (CompID, Name, StartValue, StartInvest, buyDate) VALUES ('{id}', '{name}', {scraper.actValue(id)}, {StartInvest}, '{datetime.today().strftime('%Y-%m-%d')}');"
+
+        print(sql)
+        try:
+            self.cursor.execute(sql)
+            datos = self.cursor.fetchall()
+            print(datos)
+
+        except Exception as e:
+            return e
+
 data = DataBase()
-data.load_data()
+data.create_invest('NVDA', 'NVIDIA Corporation', 20)
