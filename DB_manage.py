@@ -21,9 +21,19 @@ class DataBase:
 
         try:
             self.cursor.execute(sql)
-            datos = self.cursor.fetchone()
+            datos = self.cursor.fetchall()
             print(datos)
 
+        except Exception as e:
+            raise
+
+    def load_one_company(self, id):
+        sql = f'SELECT * FROM stock WHERE id = {id}'
+
+        try:
+            self.cursor.execute(sql)
+            datos = self.cursor.fetchone()
+            print(datos)
         except Exception as e:
             raise
 
