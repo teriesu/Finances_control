@@ -6,6 +6,6 @@ if __name__ == '__main__':
     scraper = FinViz_scraper()
 
     compData = utils.read_companies()
-    compActData = scraper.get_value()
+    compActData = scraper.get_values()
 
-    utils.calcProffit(compData, compActData)
+    print(utils.calcProffit(compData, compActData))
