@@ -24,28 +24,30 @@ class DataBase:
         try:
             self.cursor.execute(sql)
             datos = self.cursor.fetchall()
-            print(datos)
+
+            return datos
 
         except Exception as e:
             raise
 
     def load_one_company(self, id):
-        sql = f'SELECT * FROM stock WHERE CompID = {id}'
+        sql = f"SELECT * FROM stock WHERE CompID = '{id}'"
 
         try:
             self.cursor.execute(sql)
             datos = self.cursor.fetchone()
-            print(datos)
+            return datos
+
         except Exception as e:
             raise
 
     def del_invest(self, id):
-        sql = f'DELETE FROM stock WHERE (CompID = {id});'
+        sql = f"DELETE FROM stock WHERE (CompID = '{id}');"
 
         try:
             self.cursor.execute(sql)
-            datos = self.cursor.fetchall()
-            print(datos)
+            self.connection.commit()
+            print(self.load_data())
 
         except Exception as e:
             raise
@@ -55,14 +57,16 @@ class DataBase:
 
         sql = f"INSERT INTO stock (CompID, Name, StartValue, StartInvest, buyDate) VALUES ('{id}', '{name}', {scraper.actValue(id)}, {StartInvest}, '{datetime.today().strftime('%Y-%m-%d')}');"
 
-        print(sql)
         try:
             self.cursor.execute(sql)
-            datos = self.cursor.fetchall()
-            print(datos)
+            self.connection.commit()
+            print(self.load_data())
 
         except Exception as e:
             return e
 
 data = DataBase()
-data.create_invest('NVDA', 'NVIDIA Corporation', 20)
+# data.create_invest('NVDA', 'NVIDIA Corporation', 20)
+# data.load_data()
+# data.del_invest('NVDA')
+print(data.load_one_company('AAPL'))
